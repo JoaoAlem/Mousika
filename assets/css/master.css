@@ -4,3 +4,13 @@
     padding: 0;
     margin: 0;
 }
+
+/* Alterando o css do Bootstrap para ajustar alguns itens */
+#logo{
+    max-height: 10vh;
+    max-width: 100%;
+}
+
+.navbar-brand{
+    max-width: 50%;
+}
