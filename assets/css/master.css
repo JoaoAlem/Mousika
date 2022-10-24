@@ -14,3 +14,13 @@
 .navbar-brand{
     max-width: 50%;
 }
+
+/* Ajustando o css para criar mascaras nas imagens*/
+.mask{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
