@@ -13,9 +13,10 @@
 
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/master.css">
-    <title>Mousika</title>
+    <title>Mousíká</title>
 </head>
 <body>
+    <div class="background-ilaranja"></div>
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -32,7 +33,7 @@
                     <a class="nav-link" href="#">Todos os posts</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Contato</a>
+                    <a class="nav-link" href="./pages/contato.html">Contato</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Sobre nós</a>
@@ -93,32 +94,69 @@
         </article>
     </main>
 
-    <section class="d-flex align-middle justify-content-center">
+    <section class="d-flex align-middle my-3 justify-content-center">
             <div class="card m-auto" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="./assets/images/index/meninaTocandoPiano.webp" class="card-img-top" alt="mulher tocando piano">
                 <div class="card-body">
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Estou aprendendo a tocar piano, e essa é a melhor plataforma que ja encontrei no meio de minhas pesquisas!</p>
                 </div>
             </div>
             <div class="card m-auto" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="./assets/images/index/mulherTocandoVioloncelo.webp" class="card-img-top" alt="mulher tocando violoncelo ao ar livre">
                 <div class="card-body">
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Independente se você é novato ou experiente, o Mousíká é a plataforma ideal, encontrei desde as partituras mais simples até as mais difíceis</p>
                 </div>
             </div>
             <div class="card m-auto" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="./assets/images/index/homemTocandoSaxophone.webp" class="card-img-top" alt="homem tocando saxophone na rua">
                 <div class="card-body">
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Não consegui encontrar muitas partituras de saxophone em outro lugar, mas quando achei o Mousíká, minha vida mudou!</p>
                 </div>
             </div>
     </section>
 
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-          <span class="text-muted">Place sticky footer content here.</span>
+    <div id="footer" class="container bg-white">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 bg-white border-top">  
+        <div class="col mb-3">
+          <h5>Políticas</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de privacidade</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Termos de uso</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Cookies 🍪</a></li>
+          </ul>
         </div>
+    
+        <div class="col mb-3">
+          <h5>Mousíka</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Todos os posts</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Meus Favoritos</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Meus Posts</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Meu Perfil</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Editar Perfil</a></li>
+          </ul>
+        </div>
+    
+        <div class="col mb-3">
+          <h5>Sobre esse projeto</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Novidades</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sobre nós</a></li>
+          </ul>
+        </div>
+
+        <div class="col mb-3"></div>
+
+        <div class="col mb-3">
+          <a href="/index.html" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+            <img class="w-100" src="./assets/images/logo/LogoPronto.svg" alt="">
+          </a>
+          <p class="text-muted">&copy; 2022</p>
+        </div>
+
       </footer>
+    </div>
 
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/bootstrap.bundle.min.js"></script>

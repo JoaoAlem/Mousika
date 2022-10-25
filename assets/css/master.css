@@ -5,6 +5,15 @@
     margin: 0;
 }
 
+/* classes de background */
+.background-ilaranja{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/backgrounds/opattern.svg);
+    opacity: .25;
+}
+
 /* Alterando o css do Bootstrap para ajustar alguns itens */
 #logo{
     max-height: 10vh;
