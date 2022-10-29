@@ -29,3 +29,8 @@
     opacity: 0.5;
     filter: alpha(opacity=50);
 }
+
+/* classes para as tabelas de posts*/
+.colImagem{
+    max-height: 10vh;
+}

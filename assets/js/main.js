@@ -12,8 +12,21 @@ function validaFormContato(){
         alert("Informe os campos obrigatórios");
         return false;
     }else if(mensagem.value == ""){
-        nome.className += " border border-warning";
+        mensagem.className += " border border-warning";
         alert("Informe os campos obrigatórios");
         return false;
     }
+}
+
+function carregarMais(endereco, elemento){
+    xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(elemento).innerHTML += this.responseText;
+        }
+    };
+
+    xhttp.open("GET", endereco, true);
+    xhttp.send();
 }
