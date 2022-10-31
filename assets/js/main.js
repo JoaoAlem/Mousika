@@ -96,7 +96,69 @@ function validaLogin(){
         alert("Informe os campos obrigatórios");
         return false;
     }
+}
 
+function validaUpload(){
+    let nomeMusica = document.forms["fUpload"]["fNomeMusica"];
+    let nomeAutor = document.forms["fUpload"]["fNomeAutor"];
+    let dificuldade = document.forms["fUpload"]["fDificuldade"];
+    let instrumento = document.forms["fUpload"]["fInstrumento"];
+
+    if(nomeMusica.value == ""){
+        nomeMusica.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(nomeAutor.value == ""){
+        nomeAutor.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(dificuldade.value == ""){
+        dificuldade.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(instrumento.value == ""){
+        instrumento.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+}
+
+
+function validaEditarUsuario(){
+    let nome = document.forms["fEditarUsuario"]["fNome"];
+    let sobrenome = document.forms["fEditarUsuario"]["fSobrenome"];
+    let email = document.forms["fEditarUsuario"]["fEmail"];
+    let senha = document.forms["fEditarUsuario"]["fSenha"];
+
+    if(nome.value == ""){
+        nome.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(senha.value == ""){
+        senha.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(email.value == ""){
+        email.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
+
+    if(senha.value == ""){
+        senha.className += " border border-warning";
+        alert("Informe os campos obrigatórios");
+        return false;
+    }
 }
 
 function showPreview(event){
