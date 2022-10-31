@@ -99,6 +99,17 @@ function validaLogin(){
 
 }
 
+function showPreview(event){
+    if(event.target.files.length > 0){
+        var imagem = document.getElementById("labelImagem");
+        var src = URL.createObjectURL(event.target.files[0]);
+        var preview = document.getElementById("file-ip-1-preview");
+        imagem.style.display = "none";
+        preview.src = src;
+        preview.style.display = "block";
+    }
+}
+
 function carregarMais(endereco, elemento){
     xhttp = new XMLHttpRequest();
 
