@@ -8,6 +8,7 @@
 /* classes de background */
 .background-ilaranja{
     background-image: url(../images/backgrounds/opattern.svg);
+    width: auto;
 }
 
 /* Alterando o css do Bootstrap para ajustar alguns itens */
