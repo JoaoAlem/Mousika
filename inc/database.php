@@ -118,15 +118,25 @@
         }
 
         close_database($db);
+        return $resultado;
+
     }
 
     // Função para criar um post
-    function createPost(){
+    function createPost($param, $nomeArquivo, $nomeImagem){
         $db = open_database();
         $sql = 'INSERT INTO musicas (nome_musica, nome_autor, dificuldade, instrumento, id_usuario, imagem, arquivo) VALUES (:nome_musica, :nome_autor, :dificuldade, :instrumento, :id_usuario, :imagem, :arquivo)';
 
         try{
             $stmt = $db->prepare($sql);
+            $stmt->bindValue(':nome_musica', $param['nome_musica'], PDO::PARAM_STR);
+            $stmt->bindValue(':nome_autor', $param['nome_autor'], PDO::PARAM_STR);
+            $stmt->bindValue(':dificuldade', $param['dificuldade'], PDO::PARAM_STR);
+            $stmt->bindValue(':instrumento', $param['instrumento'], PDO::PARAM_STR);
+            $stmt->bindValue(':id_usuario', $param['id_usuario'], PDO::PARAM_INT);
+            $stmt->bindValue(':imagem', $nomeImagem, PDO::PARAM_STR);
+            $stmt->bindValue(':arquivo', $nomeArquivo, PDO::PARAM_STR);
+            $stmt->execute();
             
         }catch(PDOException $e){
             print $e->getMessage();

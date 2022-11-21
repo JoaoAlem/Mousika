@@ -1,0 +1,5 @@
+#Ignore VScode config
+.vscode
+
+#Ignore config.php file
+config.php
