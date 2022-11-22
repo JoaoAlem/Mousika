@@ -1,9 +1,7 @@
 # Mousíká
-----------
 O Site Mousíká é criado com o intuito de permitir que todos possam desfrutar de partituras gratuitas, sem a necessidade de precisar ficar pagando uma assinatura especifica para conseguir visualizar a musica que você tanto gosta.
 
 # Como rodar o projeto
-----------
 Para começar a usar o projeto Mousíká é necessario seguir os passos abaixo e cumprir alguns requisitos.
 
 Requisitos:
@@ -12,14 +10,11 @@ Servidor web de sua preferencia (com suporte a PHP);
 MySQL.
 ```
 
-##### Primeiro iremos clonar esse repositório
-----------
+##### Iniciando
+Para realizar as suas modificações ou usar esse projeto, é preciso saber por onde começar.
+
+###### Clonando o projeto
 `git clone https://github.com/JoaoAlem/Mousika.git`
-
-
-##### Configurando o projeto para o uso
-----------
-Para usar este repositório, é necessario que 
 
 ###### Executando o banco de dados
 Dentro do repositório clonado, teremos uma pasta com o nome `SQL`, dentro dessa pasta possui o modelo físico do banco de dados, é simplesmente abrir o `Modelo Fisico.sql`, copiar, colar e executar o SQL dentro do seu banco de dados MySQL.
@@ -36,5 +31,4 @@ if(!defined('DBAPI')){
 ```
 
 # Observações
-----------
 *Esse é um projeto criado para estudos.*
