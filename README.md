@@ -26,7 +26,7 @@ Procure o arquivo `inc/database.php` e na linha 9, altere as constantes `DB_HOST
 Procure o arquivo `assets/php/functions.php` e defina a constante DBAPI para o caminho até o `inc/database.php` da seguinte maneira:
 ```
 if(!defined('DBAPI')){
-    define('DBAPI', ABSPATH . '../../inc/database.php');
+    define('DBAPI', '../../inc/database.php');
 }
 ```
 
