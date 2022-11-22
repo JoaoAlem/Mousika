@@ -78,48 +78,42 @@
                 $stmt->bindValue(':email', $param['email'], PDO::PARAM_STR);
                 $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
                 $stmt->execute();
+                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
     
                 // Definindo a sessão do usuário para assim ele continuar logado após um tempo
                 $_SESSION['email'] = $param['email'];
                 $_SESSION['password'] = $senha;
+                //$_SESSION['id_usuario'] = ;
             }catch(PDOException $e){
                 print "Error!: " . $e->getMessage() . "<br/>";
+            }finally{
+                close_database($db);
+                return $resultado;
             }
-            close_database($db);
         }
     }
 
     // Função para fazer o login de um usuario
     function user_login($param){
         $db = open_database();
-        $sql = 'SELECT email, senha FROM usuario WHERE email = :email and senha = :senha';
+        $sql = 'SELECT email, senha FROM usuario WHERE email = :email';
         $resultado = null;
-
-        // aumentando o "custo" da hash para fazer ela mais segura
-        $options = [
-            'cost' => 12,
-        ];
-
-        // Guardando as senhas usando uma hash de criptografia
-        $senha = password_hash($param['senha'], PASSWORD_BCRYPT, $options);
         
         try {
             $stmt = $db->prepare($sql);
-            $stmt->bindValue(':email', $param['email'], PDO::PARAM_STR);
-            $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $param['email'], PDO::PARAM_STR, 100);
             $stmt->execute();
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
             // Definindo as variaveis de sessão para gerenciar a sessão do usuario
             $_SESSION['email'] = $param['email'];
-            $_SESSION['password'] = $senha;
         } catch (PDOException $e) {
             print $e->getMessage();
+        }finally{
+            close_database($db);
+            return $resultado;
         }
-
-        close_database($db);
-        return $resultado;
-
     }
 
     // Função para criar um post

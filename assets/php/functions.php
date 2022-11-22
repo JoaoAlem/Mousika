@@ -21,7 +21,8 @@
 
     function login(){
         $param = $_POST;
-        user_login($param);
+        $resultado = user_login($param);
+        var_dump($resultado);
     }
 
     function usuarioLogado(){
@@ -35,12 +36,25 @@
 
     function upload(){
         $param = $_POST;
-        var_dump($param);
+        $nomeArquivo = basename($_FILES['arquivo']['name']);
+        $nomeImagem = basename($_FILES['imagem']['name']);
 
-        $nomeArquivo = $_FILES['arquivo']['name'];
-        $nomeImagem = $_FILES['imagem']['name'];
+        moveFileUpload($nomeArquivo);
+        moveImageUpload($nomeImagem);
 
-        $upload = $_FILES;
-        var_dump($upload);
+        createPost($param, $nomeArquivo, $nomeImagem);
+    }
+
+    function moveFileUpload($nomeArquivo){
+        $uploadDir = '../uploads/files';
+        $tmp_name = $_FILES["arquivo"]["tmp_name"];
+        
+        move_uploaded_file($tmp_name, "$uploadDir/$nomeArquivo");
+    }
+    function moveImageUpload($nomeImagem){
+        $uploadDir = '../uploads/images';
+        $tmp_name = $_FILES["imagem"]["tmp_name"];
+
+        move_uploaded_file($tmp_name, "$uploadDir/$nomeImagem");
     }
 ?>

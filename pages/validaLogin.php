@@ -5,7 +5,7 @@
     // Função para verificar se o usuario ja está logado
     function valida_login(){
         global $caminhoAbsoluto;
-        header('Location: ' . $caminhoAbsoluto . '/pages/areaUsuario.php');
+        //header('Location: ' . $caminhoAbsoluto . '/pages/areaUsuario.php');
         die();
     }
 

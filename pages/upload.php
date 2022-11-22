@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-10 col-md-10 col-12">
             <form class="row border pb-3" action="validaUpload.php" name="fUpload" method="POST" onsubmit="return validaUpload();" enctype="multipart/form-data">
-              <input class="d-none" type="text" value="<?php echo("teste") ?>" name="id_usuario">
+              <input class="d-none" type="text" value="<?php echo("") ?>" name="id_usuario">
               <div class="col-lg-8 col-md-8 col-12">
                 <div class="w-100">
                   <label for="nome_musica" class="form-label">Nome da Musica</label>

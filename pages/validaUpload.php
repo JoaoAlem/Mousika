@@ -1,6 +1,5 @@
 <?php
     require_once('../assets/php/functions.php');
-
     upload();
 
     /*array(4) { ["nome_musica"]=> string(7) "sdadsas" ["nome_autor"]=> string(3) "asd" ["dificuldade"]=> string(6) "Fácil" ["instrumento"]=> string(3) "asd" }
