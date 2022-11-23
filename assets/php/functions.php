@@ -61,7 +61,7 @@
             return $newfilename;
         }
     }
-    
+
     function moveImageUpload($nomeImagem){
         // Definindo o diretorio para o upload
         global $root;
