@@ -2,13 +2,7 @@
   require_once('../assets/php/functions.php');
   include("./header.php");
 
-  if(!empty($_SESSION['email']) && !empty($_SESSION['password'])){
-    
-  }else{
-      global $caminhoAbsoluto;
-      header('Location: ' . $caminhoAbsoluto . '/pages/login.php');
-      die();
-  }
+  usuarioLogado();
 ?>
 
     <main class="container-fluid mx-auto my-3">

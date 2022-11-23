@@ -5,12 +5,12 @@
     // Função para verificar se o usuario ja está logado
     function valida_login(){
         global $caminhoAbsoluto;
-        //header('Location: ' . $caminhoAbsoluto . '/pages/areaUsuario.php');
+        header('Location: ' . $caminhoAbsoluto . '/pages/areaUsuario.php');
         die();
     }
 
     // verificando em qual das situações o usuario se encaixa
-    if(!empty($_SESSION['email']) && !empty($_SESSION['password'])){
+    if(!empty($_SESSION['email']) && !empty($_SESSION['senha'])){
         valida_login();
     }else{
         if(!empty($_POST['email']) && !empty($_POST['senha'])){

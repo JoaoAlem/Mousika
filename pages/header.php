@@ -49,7 +49,7 @@
                 <input name="nome_musica" class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Pesquisar</button>
               </form>
-              <?php if(!empty($_SESSION['email']) && !empty($_SESSION['password'])): ?>
+              <?php if(!empty($_SESSION['email']) && !empty($_SESSION['senha'])): ?>
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                   <li class="nav-item me-lg-3">
                     <a class="nav-link bg-warning rounded text-dark" aria-current="page" href=<?php echo($caminhoAbsoluto) . "/pages/areaUsuario.php"?>>Area do usuario</a>

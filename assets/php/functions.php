@@ -21,12 +21,11 @@
 
     function login(){
         $param = $_POST;
-        $resultado = user_login($param);
-        var_dump($resultado);
+        user_login($param);
     }
 
     function usuarioLogado(){
-        if(!empty($_SESSION['email']) && !empty($_SESSION['password'])){
+        if(!empty($_SESSION['email']) && !empty($_SESSION['senha'])){
             return true;
         }else{
             header('Location: ' . $GLOBALS['path'] . '/pages/login.php');

@@ -3,7 +3,7 @@
     $caminhoAbsoluto = "http://" . $_SERVER['SERVER_NAME'];
 
     // se o usuário já estiver logado, ele não pode acessar nem fazer requisições para essa pagina
-    if(!empty($_SESSION['email']) && !empty($_SESSION['password'])){
+    if(!empty($_SESSION['email']) && !empty($_SESSION['senha'])){
         header('Location: ' . $caminhoAbsoluto . '/index.php');
         die();
     }

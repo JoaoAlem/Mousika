@@ -96,23 +96,26 @@
     // Função para fazer o login de um usuario
     function user_login($param){
         $db = open_database();
-        $sql = 'SELECT email, senha FROM usuario WHERE email = :email';
+        $sql = 'SELECT id_usuario, email, senha FROM usuario WHERE email = :email';
         $resultado = null;
         
         try {
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(":email", $param['email'], PDO::PARAM_STR, 100);
+            $stmt->bindValue(":email", $param['email'], PDO::PARAM_STR);
             $stmt->execute();
-            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultado = $stmt->fetch(PDO::FETCH_OBJ);
 
-
-            // Definindo as variaveis de sessão para gerenciar a sessão do usuario
-            $_SESSION['email'] = $param['email'];
+            if(!empty($resultado)){
+                if(password_verify($param['senha'], $resultado->senha)){
+                    $_SESSION['email'] = $resultado->email;
+                    $_SESSION['senha'] = $resultado->senha;
+                    $_SESSION['id_usuario'] = $resultado->id_usuario;
+                }
+            }
         } catch (PDOException $e) {
             print $e->getMessage();
         }finally{
             close_database($db);
-            return $resultado;
         }
     }
 
