@@ -35,8 +35,17 @@ create table favoritar(
 	foreign key (id_musica) references musicas (id_musica)
 );
 
+DELIMITER $
+
+CREATE TRIGGER tgr_dataPub_musicas BEFORE INSERT ON musicas
+FOR EACH ROW
+BEGIN
+	SET NEW.data_publicacao = NOW();
+END$
+
+DELIMITER ;
+
 delete from usuario;
-INSERT into usuario (nome, email, senha, tipo) values ('');
 
 -- Drops para facilitar na mudança de tabelas, como é um banco teste não precisa de alter
 drop table usuario;

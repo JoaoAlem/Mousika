@@ -109,7 +109,7 @@
                 if(password_verify($param['senha'], $resultado->senha)){
                     $_SESSION['email'] = $resultado->email;
                     $_SESSION['senha'] = $resultado->senha;
-                    $_SESSION['id_usuario'] = $resultado->id_usuario;
+                    $_SESSION['id'] = $resultado->id_usuario;
                 }
             }
         } catch (PDOException $e) {

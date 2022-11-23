@@ -38,22 +38,53 @@
         $nomeArquivo = basename($_FILES['arquivo']['name']);
         $nomeImagem = basename($_FILES['imagem']['name']);
 
-        moveFileUpload($nomeArquivo);
-        moveImageUpload($nomeImagem);
+        $newNameFile = moveFileUpload($nomeArquivo);
+        $newNameImage = moveImageUpload($nomeImagem);
 
-        createPost($param, $nomeArquivo, $nomeImagem);
+        createPost($param, $newNameFile, $newNameImage);
     }
 
     function moveFileUpload($nomeArquivo){
-        $uploadDir = '../uploads/files';
-        $tmp_name = $_FILES["arquivo"]["tmp_name"];
-        
-        move_uploaded_file($tmp_name, "$uploadDir/$nomeArquivo");
-    }
-    function moveImageUpload($nomeImagem){
-        $uploadDir = '../uploads/images';
-        $tmp_name = $_FILES["imagem"]["tmp_name"];
+        // Definindo o diretorio para o upload
+        global $root;
+        $uploadDir = $root . "/assets/uploads/files";
 
-        move_uploaded_file($tmp_name, "$uploadDir/$nomeImagem");
+        // Definindo um nome único para o arquivo, mantendo sua extensão
+        $temp = explode(".", $nomeArquivo);
+        $newfilename = round(microtime(true)) . '.' . end($temp);
+    
+        // definindo as variaveis para executar a função de mover arquivos
+        $tmp_name = $_FILES["arquivo"]["tmp_name"]; 
+        $caminhoFinal = "$uploadDir/$newfilename";
+        
+        if(moverArquivos($tmp_name, $caminhoFinal)){
+            return $newfilename;
+        }
+    }
+    
+    function moveImageUpload($nomeImagem){
+        // Definindo o diretorio para o upload
+        global $root;
+        $uploadDir = $root . "/assets/uploads/images";
+
+        // Definindo um nome único para o arquivo, mantendo sua extensão
+        $temp = explode(".", $nomeImagem);
+        $newfilename = round(microtime(true)) . '.' . end($temp);
+
+        // definindo as variaveis para executar a função de mover arquivos
+        $tmp_name = $_FILES["arquivo"]["tmp_name"]; 
+        $caminhoFinal = "$uploadDir/$newfilename";
+
+        if(moverArquivos($tmp_name, $caminhoFinal)){
+            return $newfilename;
+        }
+    }
+
+    function moverArquivos($tmp_name, $uploadDir){
+        if(move_uploaded_file($tmp_name, $uploadDir)){
+            return true;
+        }else{
+            return false;
+        }
     }
 ?>

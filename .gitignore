@@ -3,3 +3,7 @@
 
 #Ignore config.php file
 config.php
+
+#Ignore Uploads
+assets/Uploads/files/*
+assets/Uploads/images/*
