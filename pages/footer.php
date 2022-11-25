@@ -33,7 +33,7 @@
         <div class="col mb-3"></div>
 
         <div class="col mb-3">
-          <a href="index.php" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+          <a href="../index.php" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
             <img class="w-100" src=<?php echo($caminhoAbsoluto) . "/assets/images/logo/LogoPronto.svg" ?> alt="">
           </a>
           <p class="text-muted">&copy; 2022</p>

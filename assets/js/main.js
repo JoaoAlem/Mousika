@@ -133,8 +133,8 @@ function validaUpload(){
 function validaEditarUsuario(){
     let nome = document.forms["fEditarUsuario"]["fNome"];
     let sobrenome = document.forms["fEditarUsuario"]["fSobrenome"];
-    let email = document.forms["fEditarUsuario"]["fEmail"];
-    let senha = document.forms["fEditarUsuario"]["fSenha"];
+    let senhaAntiga = document.forms["fEditarUsuario"]["fSenhaAntiga"];
+    let senhaNova = document.forms["fEditarUsuario"]["fSenhaNova"];
 
     if(nome.value == ""){
         nome.className += " border border-warning";
@@ -142,19 +142,19 @@ function validaEditarUsuario(){
         return false;
     }
 
-    if(senha.value == ""){
+    if(sobrenome.value == ""){
         senha.className += " border border-warning";
         alert("Informe os campos obrigatórios");
         return false;
     }
 
-    if(email.value == ""){
-        email.className += " border border-warning";
+    if(senhaAntiga.value == ""){
+        senha.className += " border border-warning";
         alert("Informe os campos obrigatórios");
         return false;
     }
 
-    if(senha.value == ""){
+    if(senhaNova.value == ""){
         senha.className += " border border-warning";
         alert("Informe os campos obrigatórios");
         return false;
@@ -172,15 +172,16 @@ function showPreview(event){
     }
 }
 
-function carregarMais(endereco, elemento){
+function favoritar(idUsuario, idMusica, elemento){
     xhttp = new XMLHttpRequest();
-
+    xhttp.open("POST", "validaFavoritar.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('id_usuario=' + idUsuario + "&" + 'id_musica=' + idMusica);
+    
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById(elemento).innerHTML += this.responseText;
+            elemento.innerHTML = "Favoritado";
+            elemento.disabled = true;
         }
     };
-
-    xhttp.open("GET", endereco, true);
-    xhttp.send();
 }

@@ -1,7 +1,8 @@
 <?php
     // Usando o session como uma variavel global
-    session_start(); 
-
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     // Função para a abertura de uma conexão com o banco de dados
     function open_database(){
         try {
@@ -28,7 +29,7 @@
     // Função para realizar uma consulta no banco de dados
     function database_query($param = null){
         $db = open_database();
-        $sql = 'SELECT id_musica, nome_musica, nome_autor, dificuldade, instrumento FROM musicas';
+        $sql = 'SELECT imagem, id_musica, nome_musica, nome_autor, dificuldade, instrumento FROM musicas';
         $resultado = null;
 
         if(!empty($param)){
@@ -37,7 +38,7 @@
                 $stmt = $db->prepare($sql);
                 $stmt->bindValue(':nome_musica', $param.'%', PDO::PARAM_STR);
                 $stmt->execute();
-                $resultado = $stmt->fetchAll();
+                $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }catch (PDOException $e){
                 print $e->getMessage();
             }
@@ -45,7 +46,7 @@
             try{
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
-                $resultado = $stmt->fetchAll();
+                $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }catch (PDOException $e){
                 print $e->getMessage();
             }
@@ -53,6 +54,29 @@
 
         close_database($db);
         return $resultado;
+    }
+
+    // Função para retornar uma musica no banco de dados
+    function pesquisarMusica($param){
+        $db = open_database();
+        $sql = 'SELECT m.id_musica, m.imagem, m.arquivo, m.nome_musica, m.nome_autor, m.dificuldade, m.instrumento, u.nome, u.sobrenome FROM musicas m INNER JOIN usuario u on m.id_usuario = u.id_usuario WHERE m.id_musica = :id_musica';
+        $resultado = null;
+
+        if(!empty($param)){
+            try{
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(':id_musica', $param, PDO::PARAM_STR);
+                $stmt->execute();
+                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            }catch (PDOException $e){
+                print $e->getMessage();
+            }finally{
+                close_database($db);
+                return $resultado;
+            }
+        }
+
+        
     }
 
     // Função para cadastrar um usuário
@@ -78,17 +102,11 @@
                 $stmt->bindValue(':email', $param['email'], PDO::PARAM_STR);
                 $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
                 $stmt->execute();
-                $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-                // Definindo a sessão do usuário para assim ele continuar logado após um tempo
-                $_SESSION['email'] = $param['email'];
-                $_SESSION['password'] = $senha;
-                //$_SESSION['id_usuario'] = ;
+
             }catch(PDOException $e){
                 print "Error!: " . $e->getMessage() . "<br/>";
             }finally{
                 close_database($db);
-                return $resultado;
             }
         }
     }
@@ -134,10 +152,160 @@
             $stmt->bindValue(':imagem', $nomeImagem, PDO::PARAM_STR);
             $stmt->bindValue(':arquivo', $nomeArquivo, PDO::PARAM_STR);
             $stmt->execute();
-            
         }catch(PDOException $e){
             print $e->getMessage();
+        }finally{
+            close_database($db);
         }
+    }
+
+    // função para realizar o favorito do usuario
+    function adicionarFavoritos($param){
+        $db = open_database();
+        $sql = 'INSERT INTO favoritar (id_usuario, id_musica) VALUES (:id_usuario, :id_musica);';
+
+        try{
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id_usuario', $param['id_usuario'], PDO::PARAM_INT);
+            $stmt->bindValue(':id_musica', $param['id_musica'], PDO::PARAM_INT);
+            $stmt->execute();
+        }catch(PDOException $e){
+            print $e->getMessage();
+        }finally{
+            close_database($db);
+        }
+    }
+
+    function getFavoritos(){
+        $db = open_database();
+        $sql = 'SELECT m.nome_musica, m.id_musica, m.nome_musica, m.nome_autor, m.imagem, m.instrumento, m.dificuldade  FROM favoritar f INNER JOIN musicas m on f.id_musica = m.id_musica WHERE f.id_usuario = :id_usuario';
+
+        try{
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id_usuario', $_SESSION['id'], PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            print $e->getMessage();
+        }finally{
+            close_database($db);
+            return $resultado;
+        }
+    }
+
+    function verificarFavorito($id_musica, $id_usuario){
+        $db = open_database();
+        $sql = 'SELECT COUNT(*) as total FROM favoritar WHERE id_usuario = :id_usuario AND id_musica = :id_musica;';
+
+        try{
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+            $stmt->bindValue(':id_musica', $id_musica, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if($resultado->total == "1"){
+                return true;
+            } else{
+                return false;
+            }
+        }catch(PDOException $e){
+            print $e->getMessage();
+        }finally{
+            close_database($db);
+        }
+    }
+
+    function getMeusPosts(){
+        $id = $_SESSION['id'];
+        $resultado = null;
+        $db = open_database();
+        $sql = 'SELECT m.nome_musica, m.id_musica, m.nome_musica, m.nome_autor, m.imagem, m.instrumento, m.dificuldade FROM musicas m INNER JOIN usuario u on m.id_usuario = u.id_usuario WHERE m.id_usuario = :id_usuario';
+
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id_usuario', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }finally{
+            close_database($db);
+            return $resultado;
+        }
+    }
+
+    function getUsuario(){
+        $id = $_SESSION['id'];
+        $resultado = null;
+        $db = open_database();
+        $sql = 'SELECT nome, sobrenome, email, senha FROM usuario WHERE id_usuario = :id_usuario';
+        
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id_usuario', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }finally{
+            close_database($db);
+            return $resultado;
+        }
+    }
+
+    function changeUsuario($param){
+        $id = $_SESSION['id'];
+        $db = open_database();
+        $usuario = getUsuario();
+        
+
+        // aumentando o "custo" da hash para fazer ela mais segura
+        $options = [
+            'cost' => 12,
+        ];
+
+        if(!empty($param['nome']) && strcmp($param['nome'], $usuario->nome) !== 0){
+            try {
+                $sql = 'UPDATE usuario SET nome = :nome WHERE id_usuario = :id_usuario;';
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(':nome', $param['nome'], PDO::PARAM_STR);
+                $stmt->bindValue(':id_usuario', $id, PDO::PARAM_INT);
+                $stmt->execute();
+            } catch (PDOException $e) { 
+                print $e->getMessage();
+            }
+        }
+        if(!empty($param['sobrenome']) && strcmp($param['sobrenome'], $usuario->sobrenome) !== 0){
+            try {
+                $sql = 'UPDATE usuario SET sobrenome = :sobrenome WHERE id_usuario = :id_usuario;';
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(':sobrenome', $param['sobrenome'], PDO::PARAM_STR);
+                $stmt->bindValue(':id_usuario', $id, PDO::PARAM_INT);
+                $stmt->execute();
+            } catch (PDOException $e) { 
+                print $e->getMessage();
+            }
+            
+        }
+        if(password_verify($param['senhaAntiga'], $usuario->senha)){
+            if(!empty($param['senhaNova'])){
+                try {
+                    $sql = 'UPDATE usuario SET senha = :senha WHERE id_usuario = :id_usuario;';
+                    $stmt = $db->prepare($sql);
+
+                    // Guardando as senhas usando uma hash de criptografia
+                    $senha = password_hash($param['senhaNova'], PASSWORD_BCRYPT, $options);
+                    
+                    $stmt->bindValue(':senha', $senha, PDO::PARAM_STR);
+                    $stmt->bindValue(':id_usuario', $id, PDO::PARAM_INT);
+                    $stmt->execute();
+                } catch (PDOException $e) { 
+                    print $e->getMessage();
+                }
+            }
+        }
+            
         close_database($db);
     }
 ?>

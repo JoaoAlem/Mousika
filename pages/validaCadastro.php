@@ -11,7 +11,7 @@
     // verificando se o usuario preencheu todos os dados corretamente
     if(!empty($_POST['nome']) && !empty($_POST['sobrenome']) && !empty($_POST['email']) && !empty($_POST['senha'])){
         cadastraUsuario();
-        header('Location: ' . $caminhoAbsoluto . '/index.php');
+        header('Location: ' . $caminhoAbsoluto . '/pages/login.php');
         die();
     }
 ?>

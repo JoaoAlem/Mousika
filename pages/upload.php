@@ -10,32 +10,32 @@
         <div class="row justify-content-center">
           <div class="col-lg-10 col-md-10 col-12">
             <form class="row border pb-3" action="validaUpload.php" name="fUpload" method="POST" onsubmit="return validaUpload();" enctype="multipart/form-data">
-              <input class="d-none" type="text" value="<?php echo($_SESSION['id']); ?>" name="id_usuario">
+              <input class="d-none" type="text" value="<?php if(!empty($_SESSION['id'])){echo($_SESSION['id']);} ?>" name="id_usuario">
               <div class="col-lg-8 col-md-8 col-12">
                 <div class="w-100">
                   <label for="nome_musica" class="form-label">Nome da Musica</label>
-                  <input type="text" class="form-control" name="nome_musica" id="fNomeMusica" placeholder="The Lotto">
+                  <input type="text" class="form-control" name="nome_musica" id="fNomeMusica" placeholder="The Lotto" maxlength="60" size="60">
                 </div>
                 <div class="w-100">
                   <label for="nome_autor" class="form-label">Nome do autor</label>
-                  <input type="text" class="form-control" name="nome_autor" id="fNomeAutor" placeholder="Ingrid Michaelson">
+                  <input type="text" class="form-control" name="nome_autor" id="fNomeAutor" placeholder="Ingrid Michaelson" maxlength="60" size="60">
                 </div>
                 <div class="w-100">
                   <label for="dificuldade" class="form-label">Dificuldade</label>
                   <select class="form-select" name="dificuldade" id="fDificuldade">
                     <option value="Fácil">Fácil</option>
-                    <option value="Fácil">Médio</option>
-                    <option value="Fácil">Difícil</option>
-                    <option value="Fácil">Expert</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Difícil">Difícil</option>
+                    <option value="Expert">Expert</option>
                   </select>
                 </div>
                 <div class="w-100">
                   <label for="instrumento" class="form-label">Instrumento</label>
-                  <input type="text" class="form-control" name="instrumento" id="fInstrumento" placeholder="Piano">
+                  <input type="text" class="form-control" name="instrumento" id="fInstrumento" placeholder="Piano" maxlength="20" size="20">
                 </div>
                 <div class="w-100">
-                  <label for="arquivo" class="form-label">Selecione um arquivo (.musicxml, .mxl ou .xml)</label>
-                  <input class="form-control" type="file" accept=".xml, .musicxml, .mxl" name="arquivo" required>
+                  <label for="arquivo" class="form-label">Selecione um arquivo (.musicxml, .mxl, .xml ou .pdf)</label>
+                  <input class="form-control" type="file" accept=".xml, .musicxml, .mxl, .pdf" name="arquivo" required>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4 col-12">
@@ -52,7 +52,6 @@
                 </div>
               </div>
             </form>
-            
           </div>
         </div>
       </section>

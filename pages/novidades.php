@@ -6,6 +6,30 @@
       <section class="container">
           <div class="row justify-content-center">
               <div class="col-lg-8 col-md-10 col-12">
+                <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 3.0</span> - 18th Nov 2022 até 24th Nov 2022</h5>
+                <ul class="list-unstyled mt-3">
+                  <li class="text-muted ml-3">Refinamento do site</li>
+                  <li class="text-muted ml-3">Implantação do Backend em geral</li>
+                  <li class="text-muted ml-3">medidas de segurança para mostrar dados e permitir uploads</li>
+                  <li class="text-muted ml-3">Ajustes na estrutura de uploads do site</li>
+                  <li class="text-muted ml-3">Criação das tabelas para mostrar os dados</li>
+                  <li class="text-muted ml-3">Criação dos cadastros do site</li>
+                  <li class="text-muted ml-3">Refinamento de funções implementadas anteriormente e remoção de outras funções</li>
+                </ul>
+
+                <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 2.1</span> - 17th Nov 2022</h5>
+                <ul class="list-unstyled mt-3">
+                  <li class="text-muted ml-3">Conexão com o banco de dados</li>
+                  <li class="text-muted ml-3">Implantação de métodos para a conexão e fechamento do banco de dados</li>
+                  <li class="text-muted ml-3">Algumas medidas de segurança para o armazenamento de dados</li>
+                </ul>
+
+                <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 2.0</span> - 10th Nov 2022</h5>
+                <ul class="list-unstyled mt-3">
+                  <li class="text-muted ml-3">Alteração na estrutura do repositório</li>
+                  <li class="text-muted ml-3">Transferência para o php</li>
+                </ul>
+
                 <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 1.0.3</span> - 30th Out 2022</h5>
                 <ul class="list-unstyled mt-3">
                   <li class="text-muted ml-3">Validação dos formulários de Upload e editar perfil</li>

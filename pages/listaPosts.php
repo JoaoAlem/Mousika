@@ -1,20 +1,17 @@
 <?php
   require_once('../assets/php/functions.php');
-
-  if(!empty($_GET)){
-    $pesquisa = searchMusicas();
-  }
   include("./header.php");
+
+  $pesquisa = searchMusicas();
 ?>
 
     <main class="container-fluid mx-auto my-3">
       <section class="container-fluid">
           <div class="row justify-content-center">
-            <div class="col-lg-10 col-md-10 col-12">
+            <div id="conteudo" style="max-height: 80vh;"  class="col-lg-10 col-md-10 col-12 overflow-scroll">
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Imagem</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Autor</th>
@@ -23,51 +20,27 @@
                   </tr>
                 </thead>
                 <tbody id="posts">
-                  <tr class="position-relative">
-                    <th scope="row">1</th>
-                    <td><img src="../assets/images/posts/blinding_lights.webp" class="img-thumbnail rounded colImagem" alt="the weekend blinding lights"></td>
-                    <td><a class="stretched-link text-dark text-decoration-none" href="./visualizarPost.php">Blinding Lights</a></td>
-                    <td>The Weekend</td>
-                    <td>Iniciante</td>
-                    <td>Piano</td>
-                  </tr>
-                  <tr class="position-relative">
-                    <th scope="row">2</th>
-                    <td><img src="../assets/images/posts/Better_when_im_dancing.webp" class="img-thumbnail rounded colImagem" alt="capa do filme peanuts, onde a musica foi estreiada"></td>
-                    <td><a class="stretched-link text-dark text-decoration-none" href="./visualizarPost.php">Better When I'm Dancing</a></td>
-                    <td>Meghan Trainor</td>
-                    <td>Difícil</td>
-                    <td>Saxophone</td>
-                  </tr>
-                  <tr class="position-relative">
-                    <th scope="row">3</th>
-                    <td><img src="../assets/images/posts/My_Universe.webp" class="img-thumbnail rounded colImagem" alt="capa da musica universe do coldplay"></td>
-                    <td><a class="stretched-link text-dark text-decoration-none" href="./visualizarPost.php"></a>My Universe</a></td>
-                    <td>Coldplay & BTS</td>
-                    <td>Médio</td>
-                    <td>Piano</td>
-                  </tr>
-                  <tr class="position-relative">
-                    <th scope="row">4</th>
-                    <td><img src="../assets/images/posts/Pompeii.webp" class="img-thumbnail rounded colImagem" alt="capa do album bad blood de bastille"></td>
-                    <td><a class="stretched-link text-dark text-decoration-none" href="./visualizarPost.php">Pompeii</a></td>
-                    <td>Bastille</td>
-                    <td>Expert</td>
-                    <td>Bateria</td>
-                  </tr>
-                  <tr class="position-relative">
-                    <th scope="row">5</th>
-                    <td><img src="../assets/images/posts/Sit_Still_Look_pretty.webp" class="img-thumbnail rounded colImagem" alt="Daya Sit still look pretty"></td>
-                    <td><a class="stretched-link text-dark text-decoration-none" href="./visualizarPost.php">Sit Still, Look Pretty</a></td>
-                    <td>Daya</td>
-                    <td>Médio</td>
-                    <td>Violino</td>
-                  </tr> 
+                  <?php if(empty($pesquisa)): ?>
+                    <tr class="position-relative">
+                      <td>Não Foram encontrados resultados</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  <?php else: ?>
+                    <?php foreach ($pesquisa as $row): ?>
+                      <tr class="position-relative">
+                      <td><img src=<?php echo("../assets/uploads/images/" . $row['imagem']); ?> class="img-thumbnail rounded colImagem" alt="Imagem de thumbnail"></td>
+                        <td><a class="stretched-link text-dark text-decoration-none" href=<?php echo("./visualizarPost.php?id=" . $row['id_musica']); ?>><?php echo(htmlentities($row['nome_musica'])); ?></a></td>
+                        <td><?php echo(htmlentities($row['nome_autor'])); ?></td>
+                        <td><?php echo(htmlentities($row['dificuldade'])); ?></td>
+                        <td><?php echo(htmlentities($row['instrumento'])); ?></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </tbody>           
               </table>
-              <div class="col-12">
-                <button class="btn btn-warning" onclick="carregarMais('./ajax/carregarPosts.html','posts')">Carregar Mais</button>
-              </div>
             </div>
           </div>
       </section>

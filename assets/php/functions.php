@@ -9,8 +9,14 @@
     // Função para pesquisar 
     function searchMusicas(){
         global $arquivos;
-        $param = $_GET['nome_musica'];
-        $arquivos = database_query($param);
+        
+        if(!empty($_GET['nome_musica'])){
+            $param = $_GET['nome_musica'];
+            $arquivos = database_query($param);
+        }else{
+            $arquivos = database_query();
+        }
+        
         return $arquivos;
     }
 
@@ -25,10 +31,11 @@
     }
 
     function usuarioLogado(){
+        $caminhoAbsoluto = "http://" . $_SERVER['SERVER_NAME'];
         if(!empty($_SESSION['email']) && !empty($_SESSION['senha'])){
             return true;
         }else{
-            header('Location: ' . $GLOBALS['path'] . '/pages/login.php');
+            header('Location: ' . $caminhoAbsoluto . '/pages/login.php');
             return false;
         }
     }
@@ -40,8 +47,10 @@
 
         $newNameFile = moveFileUpload($nomeArquivo);
         $newNameImage = moveImageUpload($nomeImagem);
-
-        createPost($param, $newNameFile, $newNameImage);
+        
+        if(!empty($newNameFile) && !empty($newNameImage)){
+            createPost($param, $newNameFile, $newNameImage);
+        }
     }
 
     function moveFileUpload($nomeArquivo){
@@ -67,12 +76,12 @@
         global $root;
         $uploadDir = $root . "/assets/uploads/images";
 
-        // Definindo um nome único para o arquivo, mantendo sua extensão
+        // Definindo um nome único para o imagem, mantendo sua extensão
         $temp = explode(".", $nomeImagem);
         $newfilename = round(microtime(true)) . '.' . end($temp);
 
-        // definindo as variaveis para executar a função de mover arquivos
-        $tmp_name = $_FILES["arquivo"]["tmp_name"]; 
+        // definindo as variaveis para executar a função de mover imagem
+        $tmp_name = $_FILES["imagem"]["tmp_name"]; 
         $caminhoFinal = "$uploadDir/$newfilename";
 
         if(moverArquivos($tmp_name, $caminhoFinal)){
@@ -86,5 +95,39 @@
         }else{
             return false;
         }
+    }
+
+    function getMusica(){
+        global $arquivos;
+        $param = $_GET['id'];
+        $arquivos = pesquisarMusica($param);
+        return $arquivos;
+    }
+
+    function favoritar(){
+        $param = $_POST;
+        adicionarFavoritos($param);
+    }
+
+    function checkFavoritar($id_usuario){
+        $id = $_GET['id'];
+        return verificarFavorito($id, $id_usuario);
+    }
+
+    function pesquisarFavoritos(){
+        return getFavoritos();
+    }
+
+    function pesquisarMeusPosts(){
+        return getMeusPosts();
+    }
+
+    function pesquisarUsuario(){
+        return getUsuario();
+    }
+
+    function alteraUsuario(){
+        $param = $_POST;
+        changeUsuario($param);
     }
 ?>

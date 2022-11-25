@@ -1,9 +1,6 @@
 #Ignore VScode config
 .vscode
 
-#Ignore config.php file
-config.php
-
 #Ignore Uploads
-assets/Uploads/files/*
-assets/Uploads/images/*
+assets/uploads/files/*
+assets/uploads/images/*

@@ -1,6 +1,7 @@
 <?php
     // Iniciando a sessão para poder limpa-la
     session_start();
+    $caminhoAbsoluto = "http://" . $_SERVER['SERVER_NAME'];
 
     // definindo qualquer valor da sessão como nulo
     $_SESSION = array();

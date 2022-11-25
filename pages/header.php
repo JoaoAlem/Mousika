@@ -4,7 +4,6 @@
   }
   
   $caminhoAbsoluto = "http://" . $_SERVER['SERVER_NAME'];
-  $GLOBALS['path'] = $caminhoAbsoluto;
  
 ?>
 

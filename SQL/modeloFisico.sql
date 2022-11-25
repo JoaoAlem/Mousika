@@ -1,3 +1,4 @@
+create database mousika;
 use mousika;
 
 -- tabela de um usuario
@@ -45,7 +46,15 @@ END$
 
 DELIMITER ;
 
-delete from usuario;
+-- Selects usados para visualizar resultados
+select * from favoritar f ;
+
+SELECT m.nome_musica, m.id_musica, m.nome_musica, m.nome_autor, m.imagem, m.instrumento, m.dificuldade FROM musicas m INNER JOIN usuario u on m.id_usuario = u.id_usuario WHERE m.id_usuario = 1;
+SELECT m.nome_musica, m.nome_musica, m.nome_autor, m.imagem, m.instrumento, m.dificuldade  FROM favoritar f INNER JOIN musicas m on f.id_musica = m.id_musica WHERE f.id_usuario = 1;
+
+select count(*) from usuario;
+
+delete from favoritar;
 
 -- Drops para facilitar na mudança de tabelas, como é um banco teste não precisa de alter
 drop table usuario;
