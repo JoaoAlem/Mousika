@@ -1,6 +1,2 @@
 #Ignore VScode config
 .vscode
-
-#Ignore Uploads
-assets/uploads/files/*
-assets/uploads/images/*
